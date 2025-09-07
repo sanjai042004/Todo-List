@@ -27,10 +27,7 @@ export const TodoItem = ({ todo }) => {
     );
   };
   dayjs.extend(relativeTime);
-  //   const formatDate = (dateString) => {
-  //   const date = new Date(dateString);
-  //   return date.toLocaleString();
-  // };
+
 
   return (
     <div className="flex flex-row sm:flex-row justify-between items-start sm:items-center bg-white shadow px-4 py-4 sm:px-6 sm:py-5 rounded-xl max-w-2xl gap-3">
