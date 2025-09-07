@@ -4,31 +4,26 @@ const express = require("express");
 const todoRoute = require("./src/routes/todo.route");
 const { default: mongoose } = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-
 app.use(cors());
 app.use(express.json());
 
-
-const mongoOptions = {
-  maxPoolSize: 20,
-};
+const mongoOptions = { maxPoolSize: 20 };
 let isConnected = false;
-
 
 const connectToMongoDB = async () => {
   if (!isConnected) {
     try {
       const mongoUri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.b9qeg0t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-
       await mongoose.connect(mongoUri, mongoOptions);
       isConnected = true;
-      console.log("✅ Connected to MongoDB with connection pooling");
+      console.log("✅ Connected to MongoDB");
     } catch (error) {
-      console.log("❌ Error connecting to MongoDB", error.message);
+      console.log("❌ MongoDB Error:", error.message);
       throw error;
     }
   }
@@ -43,13 +38,10 @@ app.use(async (_, res, next) => {
   }
 });
 
-
+// 🔹 API Routes
 app.use("/api/todo", todoRoute);
 
 
-app.get("/", (_, res) => {
-  res.send("Welcome to TODO backend");
-});
 
 // 🚀 Start server
 app.listen(PORT, () => {

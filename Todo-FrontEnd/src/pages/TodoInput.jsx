@@ -34,12 +34,12 @@ export const TodoInput = () => {
     value={task}
     onChange={handleChange}
     placeholder="Enter a task..."
-    className="w-2/3 sm:flex-1 border border-blue-300 px-3 py-2 rounded-md focus:ring-2 focus:ring-blue-400 text-sm"
+    className="w-2/3 sm:flex-1 outline-none px-3 py-2 rounded-md text-xl"
   />
   <button
-    className="w-1/3 sm:w-auto bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm"
+    className="w-1/3 sm:w-auto cursor-pointer bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm"
   >
-    {editId ? "Update" : "Add"}
+    {editId ? "Save" : "Add"}
   </button>
 </form>
 
