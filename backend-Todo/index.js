@@ -1,16 +1,21 @@
 require("dotenv").config();
-
 const express = require("express");
-const todoRoute = require("./src/routes/todo.route");
-const { default: mongoose } = require("mongoose");
+const  mongoose  = require("mongoose");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const path = require("path");
+const routes = require("./src/routes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials:true
+}))
 
 const mongoOptions = { maxPoolSize: 20 };
 let isConnected = false;
@@ -38,8 +43,8 @@ app.use(async (_, res, next) => {
   }
 });
 
-// 🔹 API Routes
-app.use("/api/todo", todoRoute);
+// Routes
+app.use("/api", routes);
 
 
 
